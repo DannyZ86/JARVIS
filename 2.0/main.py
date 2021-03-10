@@ -48,14 +48,16 @@ def get_name():
     usrname = get_audio()
     return usrname
 
-def rid_repeats():
-    f = open("queue.txt", "w")
-    lines_seen = set()
-    for line in open("queue.txt", "r"):
-        if line not in lines_seen:
-            f.write(line)
-            lines_seen.add(line)
-    f.close()
+###########################
+# Cant get this to work yet
+###########################
+# def rid_repeats():
+#     f = open("queue.txt", "r").readlines()
+#     lines_seen = set(lines)
+#     out = open("queue.txt", "w")
+#     for line in open("queue.txt", "r"):
+#         out.write(line)
+#     f.close()
 
 def check_queue(task):
     file = path.isfile('queue.txt')
@@ -64,14 +66,19 @@ def check_queue(task):
         f.write(task + "\n")
         #rid_repeats()
         speak("This task will be added to my library")
+        f.close()
     else:
-        speak("False")
+        f = open("queue.txt", "x")
+        f.write(task + "\n")
+        #rid_repeats()
+        speak("This task will be added to my library")
+        f.close()
 
 # Main function starts here
 if __name__ == '__main__':
-    #setup()
-    #usrname = get_name()
-    #speak("How can I assist you" + usrname)
+    setup()
+    usrname = get_name()
+    speak("How can I assist you" + usrname)
     while True:
         command = get_audio()
         if "jarvis" in command:
